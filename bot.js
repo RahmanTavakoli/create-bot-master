@@ -23,8 +23,8 @@ const editMessageWithOptions = (chatId, messageId, text, options) => {
 bot.onText(/\/start/, msg => {
     const chatId = msg.chat.id
     const userName = msg.from.first_name
+    const welcomeMessage = `${userName} ${userLastName} \n  به کانال من خوش آمدید mxxjid🙏🙏`
     const userLastName = msg.from.last_name || ''
-    const welcomeMessage = `${userName} ${userLastName} \n عزیز به کانال من خوش آمدید 🙏🙏`
 
     const startOptions = {
         reply_markup: {
@@ -45,9 +45,9 @@ bot.on('callback_query', callbackQuery => {
     switch (data) {
         case 'about_me':
             const amirInfo = `
-*Amir Nobari*
-🎉I'm the founder and developer of the bot.🎉
-For more information, please visit my LinkedIn profile, GitHub profile, or Telegram profile.
+            🎉من میخوام که بات خفن تلگرام بر پایه web3 بسازم و این کارو میکنم.🎉
+*من رحمانم*
+میتونی من تلگرام گیت هاب یا لینکدین دنبال کنی
 `
             const inlineKeyboard = [
                 [
