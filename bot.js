@@ -7,7 +7,7 @@ bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const firstName = msg.from.first_name;
 
-    const welcomeMessage = "سلام به ربات vendorsBot خوش آمادید اینجا میتونید یه فروشگاه تلگرامی کامل با همه امکانات بدون کد نویس ایجائ کنی و اون رو هر لحظه مدیریت کنی";
+    const welcomeMessage = "سلام به ربات vendorsBot خوش آمدید اینجا میتونید یه فروشگاه تلگرامی کامل با همه امکانات بدون کد نویس ایجاد کنی و اون رو هر لحظه مدیریت کنی";
     const personalizedMessage = `سلام ${firstName}، برای ایجاد فروشگاهی مدنظر خود دکمه زیر را لمس کنید:`;
 
     const options = {
@@ -16,7 +16,7 @@ bot.onText(/\/start/, (msg) => {
                 [
                     {
                         text: "باز کردن برنامه",
-                        url: "https://rezanuts.ir" // آدرس لینک مورد نظر
+                        url: "https://rezanuts.ir" // آدرس لینک مورد نظر خود را اینجا وارد کنید
                     }
                 ]
             ]
@@ -34,18 +34,17 @@ bot.on('message', (msg) => {
     if (msg.text !== "/start") {
         const options = {
             reply_markup: {
-                keyboard: [
+                inline_keyboard: [
                     [
                         {
-                            text: "Open ⬆️"
+                            text: "Open ⬆️",
+                            url: "https://rezanuts.ir" // آدرس لینک مورد نظر خود را اینجا وارد کنید
                         }
                     ]
-                ],
-                resize_keyboard: true,
-                one_time_keyboard: true
+                ]
             }
         };
 
-        bot.sendMessage(chatId, " را برای باز کردن برنامه دکمه Open لمس کنید:", options);
+        bot.sendMessage(chatId, "برای باز کردن برنامه دکمه Open را لمس کنید:", options);
     }
 });
