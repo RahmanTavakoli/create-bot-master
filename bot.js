@@ -1,103 +1,51 @@
-const TelegramBot = require('node-telegram-bot-api')
-const { token, amirlinkedinUrl, amirgithubUrl, amirtelegramUrl } = require('./config')
+const { token } = require('./config');
+const TelegramBot = require('node-telegram-bot-api');
 
-const bot = new TelegramBot(token, { polling: true })
+const bot = new TelegramBot(token, { polling: true });
 
-const createInlineButtons = buttons => buttons.map(button => ({
-    text: button.text,
-    callback_data: button.callback_data,
-}))
+bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    const firstName = msg.from.first_name;
 
-const createBackButton = () => [{ text: 'بازگشت 🔙', callback_data: 'back' }]
+    const welcomeMessage = "سلام به ربات vendorsBot خوش آمادید اینجا میتونید یه فروشگاه تلگرامی کامل با همه امکانات بدون کد نویس ایجائ کنی و اون رو هر لحظه مدیریت کنی";
+    const personalizedMessage = `سلام ${firstName}، برای ایجاد فروشگاهی مدنظر خود دکمه زیر را لمس کنید:`;
 
-const sendMessageWithOptions = (chatId, text, options) => {
-    const defaultOptions = { parse_mode: 'markdown' }
-    bot.sendMessage(chatId, text, { ...defaultOptions, ...options })
-}
-
-const editMessageWithOptions = (chatId, messageId, text, options) => {
-    const defaultOptions = { parse_mode: 'markdown' }
-    bot.editMessageText(text, { chat_id: chatId, message_id: messageId, ...defaultOptions, ...options })
-}
-
-bot.onText(/\/start/, msg => {
-    const chatId = msg.chat.id
-    const userName = msg.from.first_name
-    const welcomeMessage = `${userName} ${userLastName} \n  به کانال من خوش آمدید mxxjid🙏🙏`
-    const userLastName = msg.from.last_name || ''
-
-    const startOptions = {
+    const options = {
         reply_markup: {
             inline_keyboard: [
-                createInlineButtons([{ text: 'About Me', callback_data: 'about_me' }, { text: 'Channels', callback_data: 'channels' }]),
-            ],
-        },
-    }
-
-    sendMessageWithOptions(chatId, welcomeMessage, startOptions)
-})
-
-bot.on('callback_query', callbackQuery => {
-    const chatId = callbackQuery.message.chat.id
-    const messageId = callbackQuery.message.message_id
-    const data = callbackQuery.data
-
-    switch (data) {
-        case 'about_me':
-            const amirInfo = `
-            🎉من میخوام که بات خفن تلگرام بر پایه web3 بسازم و این کارو میکنم.🎉
-*من رحمانم*
-میتونی من تلگرام گیت هاب یا لینکدین دنبال کنی
-`
-            const inlineKeyboard = [
                 [
-                    { text: 'RahmanTavakoli LinkedIn', url: amirlinkedinUrl },
-                    { text: 'RahmanTavakoli GitHub', url: amirgithubUrl },
-                    { text: 'RahmanTavakoli Telegram', url: amirtelegramUrl },
-                ],
-                createBackButton(),
+                    {
+                        text: "باز کردن برنامه",
+                        url: "https://rezanuts.ir" // آدرس لینک مورد نظر
+                    }
+                ]
             ]
-            const aboutMeOptions = { reply_markup: { inline_keyboard: inlineKeyboard } }
-            editMessageWithOptions(chatId, messageId, amirInfo, aboutMeOptions)
-            break
+        }
+    };
 
-        case 'channels':
-            const channelsOptions = {
-                reply_markup: {
-                    inline_keyboard: [
-                        createInlineButtons([{ text: 'کانال اصلی', callback_data: 'main_channel' }, { text: 'گروه متصل به کانال', callback_data: 'related_group' }]),
-                        createBackButton(),
-                    ],
-                },
-            }
-            editMessageWithOptions(chatId, messageId, 'Choose a channel:', channelsOptions)
-            break
+    bot.sendMessage(chatId, welcomeMessage).then(() => {
+        bot.sendMessage(chatId, personalizedMessage, options);
+    });
+});
 
-        case 'main_channel':
-            const mainChannelOptions = {
-                reply_markup: { inline_keyboard: [createBackButton()] },
-            }
-            editMessageWithOptions(chatId, messageId, 'کانال اصلی: [js_challenges](https://t.me/js_challenges)', mainChannelOptions)
-            break
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
 
-        case 'related_group':
-            const relatedGroupOptions = {
-                reply_markup: { inline_keyboard: [createBackButton()] },
+    if (msg.text !== "/start") {
+        const options = {
+            reply_markup: {
+                keyboard: [
+                    [
+                        {
+                            text: "Open ⬆️"
+                        }
+                    ]
+                ],
+                resize_keyboard: true,
+                one_time_keyboard: true
             }
-            editMessageWithOptions(chatId, messageId, 'گروه متصل به کانال اصلی: [js_masters_gp](https://t.me/js_masters_gp)', relatedGroupOptions)
-            break
+        };
 
-        case 'back':
-            const startOptions = {
-                reply_markup: {
-                    inline_keyboard: [
-                        createInlineButtons([{ text: 'About Me', callback_data: 'about_me' }, { text: 'Channels', callback_data: 'channels' }]),
-                    ],
-                },
-            }
-            editMessageWithOptions(chatId, messageId, 'به ربات من خوش آمدید 😍', startOptions)
-            break
+        bot.sendMessage(chatId, " را برای باز کردن برنامه دکمه Open لمس کنید:", options);
     }
-
-    bot.answerCallbackQuery(callbackQuery.id)
-})
+});
