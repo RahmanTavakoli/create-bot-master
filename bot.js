@@ -1,4 +1,5 @@
 const { token } = require('./config');
+const { myApp } = require('./config');
 const TelegramBot = require('node-telegram-bot-api');
 
 const bot = new TelegramBot(token, { polling: true });
@@ -61,7 +62,7 @@ bot.on('message', (msg) => {
                     [
                         {
                             text: "Open ⬆️",
-                            url: "https://rezanuts.ir"
+                            url: {myApp}
                         }
                     ]
                 ]
