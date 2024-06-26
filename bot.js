@@ -62,7 +62,7 @@ bot.on('message', (msg) => {
                     [
                         {
                             text: "Open ⬆️",
-                            url: {myApp}
+                            url: myApp
                         }
                     ]
                 ]
