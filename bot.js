@@ -17,7 +17,8 @@ bot.onText(/\/start/, (msg) => {
                 [
                     {
                         text: "باز کردن برنامه",
-                        login_url: {  myApp // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                        login_url: { 
+                            url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
                         }
                     }
                 ]
@@ -40,7 +41,8 @@ bot.on('message', (msg) => {
                     [
                         {
                             text: "Open ⬆️",
-                            login_url: { myApp // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                            login_url: {
+                                url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
                             }
                         }
                     ]
