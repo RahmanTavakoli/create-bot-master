@@ -1,5 +1,4 @@
-const { myApp } = require('./config');
-const { token } = require('./config');
+const { myApp, token } = require('./config');
 const TelegramBot = require('node-telegram-bot-api');
 
 const bot = new TelegramBot(token, { polling: true });
@@ -17,7 +16,9 @@ bot.onText(/\/start/, (msg) => {
                 [
                     {
                         text: "باز کردن برنامه",
-                        url: myApp // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                        login_url: {
+                            url: myApp // آدرس لینک مورد نظر خود را اینجا از config بگذارید
+                        }
                     }
                 ]
             ]
@@ -38,8 +39,10 @@ bot.on('message', (msg) => {
                 inline_keyboard: [
                     [
                         {
-                            text: "Open ⬆️ ",
-                            url: myApp // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                            text: "Open ⬆️",
+                            login_url: {
+                                url: myApp // آدرس لینک مورد نظر خود را اینجا از config بگذارید
+                            }
                         }
                     ]
                 ]
