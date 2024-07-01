@@ -38,7 +38,7 @@ bot.on('message', (msg) => {
                 inline_keyboard: [
                     [
                         {
-                            text: "Open ⬆️",
+                            text: "Open ⬆️ ",
                             url: myApp // آدرس لینک مورد نظر خود را اینجا وارد کنید
                         }
                     ]
