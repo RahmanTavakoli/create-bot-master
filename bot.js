@@ -22,7 +22,9 @@ bot.onText(/\/start/, (msg) => {
             inline_keyboard: [
                 [{
                     text: "باز کردن برنامه",
-                    url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                    login_url: {
+                        url: "https:t.me/vendorz_bot/Vendorz" // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                    }
                 }]
             ]
         }
@@ -42,7 +44,9 @@ bot.on('message', (msg) => {
                 inline_keyboard: [
                     [{
                         text: "Open ⬆️",
-                        url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                        login_url: {
+                            url: "https:t.me/vendorz_bot/Vendorz" // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                        }
                     }]
                 ]
             }
