@@ -1,8 +1,14 @@
-const { myApp } = require('./config');
-const { token } = require('./config');
+const {
+    myApp
+} = require('./config');
+const {
+    token
+} = require('./config');
 const TelegramBot = require('node-telegram-bot-api');
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, {
+    polling: true
+});
 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
@@ -14,14 +20,10 @@ bot.onText(/\/start/, (msg) => {
     const options = {
         reply_markup: {
             inline_keyboard: [
-                [
-                    {
-                        text: "باز کردن برنامه",
-                        login_url: { 
-                            url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
-                        }
-                    }
-                ]
+                [{
+                    text: "باز کردن برنامه",
+                    url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                }]
             ]
         }
     };
@@ -38,14 +40,10 @@ bot.on('message', (msg) => {
         const options = {
             reply_markup: {
                 inline_keyboard: [
-                    [
-                        {
-                            text: "Open ⬆️",
-                            login_url: {
-                                url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
-                            }
-                        }
-                    ]
+                    [{
+                        text: "Open ⬆️",
+                        url: 'http:t.me/vendorz_bot/Vendorz' // آدرس لینک مورد نظر خود را اینجا وارد کنید
+                    }]
                 ]
             }
         };
